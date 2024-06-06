@@ -1,0 +1,69 @@
+templates:
+  audience_score:
+    default:
+      horizontal_offset: 50
+      horizontal_align: right
+      vertical_offset: 50
+      vertical_align: bottom
+    conditionals:
+      files:
+        conditions:
+          - key: audience_score_high_backdrop
+            value: config/overlays/images/audience_score/audience_score_high.png
+          - key: audience_score_mid_backdrop
+            value: config/overlays/images/audience_score/audience_score_mid.png
+          - key: audience_score_low_backdrop
+            value: config/overlays/images/audience_score/audience_score_low.png
+      audience_rating.gte:
+        conditions:
+          - key: [audience_score_high, audience_score_high_backdrop]
+            value: 8.0
+          - key: [audience_score_mid, audience_score_mid_backdrop]
+            value: 6.0
+          - key: [audience_score_low, audience_score_low_backdrop]
+            value: 0
+      names:
+        default: <<overlay_name>>
+        conditions:
+          - key: [audience_score_high, audience_score_mid, audience_score_low]
+            value: text(<<audience_rating>>)
+    optional:
+      - file
+    plex_all: true
+    filters:
+      audience_rating.gte: <<audience_rating.gte>>
+    overlay:
+      name: <<names>>
+      group: <<group>>
+      weight: <<weight>>
+      file: <<files>>
+      horizontal_offset: <<horizontal_offset>>
+      horizontal_align: <<horizontal_align>>
+      vertical_offset: <<vertical_offset>>
+      vertical_align: <<vertical_align>>
+      back_width: 140
+      back_height: 80
+      back_align: center
+      font_color: "#111111"
+      font: config/overlays/fonts/AvenirNextLTPro-Bold.ttf
+      font_size: 68
+
+overlays:
+  audience_score_high_backdrop:
+    variables: { key: audience_score_high_backdrop, weight: 500, group: backdrop }
+    template: [ name: audience_score ]
+  audience_score_mid_backdrop:
+    variables: { key: audience_score_mid_backdrop, weight: 400, group: backdrop }
+    template: [ name: audience_score ]
+  audience_score_low_backdrop:
+    variables: { key: audience_score_low_backdrop, weight: 300, group: backdrop }
+    template: [ name: audience_score ]
+  audience_score_high:
+    variables: { key: audience_score_high, weight: 500, group: score }
+    template: [ name: audience_score ]
+  audience_score_mid:
+    variables: { key: audience_score_mid, weight: 400, group: score }
+    template: [ name: audience_score ]
+  audience_score_low:
+    variables: { key: audience_score_low, weight: 300, group: score }
+    template: [ name: audience_score ]

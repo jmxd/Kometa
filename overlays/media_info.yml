@@ -1,0 +1,417 @@
+##############################################################################
+#                             Media Info Overlay                             #
+#                              Created by: jmxd                              #
+#                        https://buymeacoffee.com/jmxd                       #
+#                                                                            #
+#                         _/  _/      _/  _/      _/  _/_/_/                 #
+#                        _/  _/_/  _/_/    _/  _/    _/    _/                #
+#                       _/  _/  _/  _/      _/      _/    _/                 #
+#                _/    _/  _/      _/    _/  _/    _/    _/                  #
+#                 _/_/    _/      _/  _/      _/  _/_/_/                     #
+#                                                                            #
+#      For correct functionality TRaSH naming of your files is required      #
+#  https://trash-guides.info/Radarr/Radarr-recommended-naming-scheme/#plex   #
+#                                                                            #
+##############################################################################
+#                                                                            #
+# Template specific variables available:                                     #
+#                                                                            #
+# - video_only, audio_only, resolution_only, edition_only                    #
+#     When set to true will only apply that type of overlay.                 #
+#                                                                            #
+# - use_<<type>>: (combined, video, audio, resolution, edition)              #
+#     When set to false will disable that type of overlay.                   #
+#     Note: To disable audio or video you must set `use_combined`            #
+#     to false as well.                                                      #
+#                                                                            #
+# - use_gradient_top, use_gradient_bottom                                    #
+#     Set to false to disable the backdrop                                   #
+#                                                                            #
+##############################################################################
+
+external_templates:
+  default: templates
+  template_variables:
+    default:
+      vertical_offset: 50
+      horizontal_align: left
+    conditionals:
+      file:
+        conditions:
+          - type: [combined, video, audio]
+            value: config/overlays/images/media_info/codec/<<key>>.png
+          - type: resolution
+            value: config/overlays/images/media_info/resolution/<<key>>.png
+          - type: edition
+            value: config/overlays/images/media_info/edition/<<key>>.png
+      final_use:
+        conditions:
+          - video_only.exists: true
+            type: [combined, audio, resolution, edition]
+            value: false
+          - audio_only.exists: true
+            type: [combined, video, resolution, edition]
+            value: false
+          - resolution_only.exists: true
+            type: [combined, video, audio, edition]
+            value: false
+          - edition_only.exists: true
+            type: [combined, video, audio, resolution]
+            value: false
+      suppress_overlays:
+        conditions:
+          - type: combined
+            value:
+              - DV
+              - HDR
+              - Plus
+              - DV-HDR
+              - DV-Plus
+              - DigitalPlus
+              - DTS-HD
+              - Atmos
+              - TrueHD-Atmos
+          - type: video
+            value:
+              - DigitalPlus
+              - DTS-HD
+              - Atmos
+              - TrueHD-Atmos
+          - type: audio
+            value:
+              - DV
+              - HDR
+              - Plus
+              - DV-HDR
+              - DV-Plus
+      vertical_align:
+        conditions:
+          - type: [resolution, edition]
+            value: top
+          - type: [combined, video, audio]
+            value: bottom
+      horizontal_offset:
+        default: 50
+        conditions:
+          - type: edition
+            res: 4K
+            value: 186
+          - type: edition
+            res: 1080p
+            value: 202
+      group:
+        conditions:
+          - type: [resolution, edition]
+            value: <<type>>
+          - type: [combined, video, audio]
+            value: <<type>>_codec
+
+templates:
+  codec_info:
+    conditionals:
+      regex:
+        conditions:
+          - key: DV
+            value: '(?i)\[(?!.*HDR)(DV)\]'
+          - key: HDR
+            value: '(?i)\[(HDR10)\]'
+          - key: Plus
+            value: '(?i)\[(HDR10Plus)\]'
+          - key: DigitalPlus
+            value: '(?i)\[(EAC3( 5\.1)?)\]'
+          - key: DTS-HD
+            value: '(?i)\[(DTS-HD MA(?: 5\.1| 7\.1)?)\]'
+          - key: Atmos
+            value: '(?i)\[(EAC3 Atmos( 5\.1)?)\]'
+          - key: TrueHD-Atmos
+            value: '(?i)\[(TrueHD Atmos( 7\.1)?)\]'
+          - key: DV-HDR
+            value: '(?i)\[(DV HDR10)\]'
+          - key: DV-Plus
+            value: '(?i)\[(DV HDR10Plus)\]'
+          - key: DV-DigitalPlus
+            value: '(?i)\[(?!.*HDR)(DV)\].*\[(EAC3( 5\.1)?)\]'
+          - key: HDR-DigitalPlus
+            value: '(?i)\[(HDR10)\].*\[(EAC3( 5\.1)?)\]'
+          - key: Plus-DigitalPlus
+            value: '(?i)\[(HDR10Plus)\].*\[(EAC3( 5\.1)?)\]'
+          - key: DV-HDR-DigitalPlus
+            value: '(?i)\[(DV HDR10)\].*\[(EAC3( 5\.1)?)\]'
+          - key: DV-Plus-DigitalPlus
+            value: '(?i)\[(DV HDR10Plus)\].*\[(EAC3( 5\.1)?)\]'
+          - key: DV-DTS-HD
+            value: '(?i)\[(?!.*HDR)(DV)\].*\[(DTS-HD MA(?: 5\.1| 7\.1)?)\]'
+          - key: HDR-DTS-HD
+            value: '(?i)\[(HDR10)\].*\[(DTS-HD MA(?: 5\.1| 7\.1)?)\]'
+          - key: Plus-DTS-HD
+            value: '(?i)\[(HDR10Plus)\].*\[(DTS-HD MA(?: 5\.1| 7\.1)?)\]'
+          - key: DV-HDR-DTS-HD
+            value: '(?i)\[(DV HDR10)\].*\[(DTS-HD MA(?: 5\.1| 7\.1)?)\]'
+          - key: DV-Plus-DTS-HD
+            value: '(?i)\[(DV HDR10Plus)\].*\[(DTS-HD MA(?: 5\.1| 7\.1)?)\]'
+          - key: DV-Atmos
+            value: '(?i)\[(?!.*HDR)(DV)\].*\[(EAC3 Atmos( 5\.1)?)\]'
+          - key: HDR-Atmos
+            value: '(?i)\[(HDR10)\].*\[(EAC3 Atmos( 5\.1)?)\]'
+          - key: Plus-Atmos
+            value: '(?i)\[(HDR10Plus)\].*\[(EAC3 Atmos( 5\.1)?)\]'
+          - key: DV-HDR-Atmos
+            value: '(?i)\[(DV HDR10)\].*\[(EAC3 Atmos( 5\.1)?)\]'
+          - key: DV-Plus-Atmos
+            value: '(?i)\[(DV HDR10Plus)\].*\[(EAC3 Atmos( 5\.1)?)\]'
+          - key: DV-TrueHD-Atmos
+            value: '(?i)\[(?!.*HDR)(DV)\].*\[(TrueHD Atmos( 7\.1)?)\]'
+          - key: HDR-TrueHD-Atmos
+            value: '(?i)\[(HDR10)\].*\[(TrueHD Atmos( 7\.1)?)\]'
+          - key: Plus-TrueHD-Atmos
+            value: '(?i)\[(HDR10Plus)\].*\[(TrueHD Atmos( 7\.1)?)\]'
+          - key: DV-HDR-TrueHD-Atmos
+            value: '(?i)\[(DV HDR10)\].*\[(TrueHD Atmos( 7\.1)?)\]'
+          - key: DV-Plus-TrueHD-Atmos
+            value: '(?i)\[(DV HDR10Plus)\].*\[(TrueHD Atmos( 7\.1)?)\]'
+    optional:
+      - use_<<type>>
+    run_definition:
+      - <<use_<<type>>>>
+    ignore_blank_results: true
+    plex_all: true
+    filters:
+      filepath.regex: <<regex>>
+
+  resolution_info:
+    conditionals:
+      regex:
+        conditions:
+          - key: 1080P
+            value: '(?i)\[(?:.*-)?(1080p(?:\s+\w+)?)(?=\])'
+          - key: Ultra-HD
+            value: '(?i)\[(?:.*-)?(2160p(?:\s+\w+)?)(?=\])'
+    optional:
+      - use_<<type>>
+    run_definition:
+      - <<use_<<type>>>>
+    ignore_blank_results: true
+    plex_all: true
+    filters:
+      filepath.regex: <<regex>>
+
+  edition_info:
+    conditionals:
+      regex:
+        conditions:
+          - key: IMAX
+            value: '(?i)\{edition-IMAX[^}]*\}'
+          - key: Unrated-Edition
+            value: '(?i)\{edition-Unrated[^}]*\}'
+          - key: Directors-Cut
+            value: '(?i)\{edition-Director[^}]*\}'
+          - key: Special-Edition
+            value: '(?i)\{edition-Special[^}]*\}'
+          - key: Anniversary-Edition
+            value: '(?i)\{edition-Anniversary[^}]*\}'
+          - key: Collectors-Edition
+            value: '(?i)\{edition-Collector[^}]*\}'
+          - key: Minus-Color
+            value: '(?i)\{edition-Minus Color[^}]*\}'
+          - key: Extended-Cut
+            value: '(?i)\{edition-Extended Cut[^}]*\}'
+          - key: Extended-Edition
+            value: '(?i)\{edition-Extended Edition[^}]*\}'
+    optional:
+      - use_<<type>>
+      - allowed_libraries
+    run_definition:
+      - <<use_<<type>>>>
+      - <<allowed_libraries>>
+    ignore_blank_results: true
+    plex_all: true
+    filters:
+      resolution: <<res>>
+      filepath.regex: <<regex>>
+
+  backdrop:
+    default:
+      builder_level: <<builder_level>>
+    conditionals:
+      file:
+        conditions:
+          - key: gradient_top
+            builder_level: episode
+            value: config/overlays/images/gradients/gradient_episode_top.png
+          - key: gradient_top
+            value: config/overlays/images/gradients/gradient_top.png
+          - key: gradient_bottom
+            builder_level: episode
+            value: config/overlays/images/gradients/gradient_episode_bottom.png
+          - key: gradient_bottom
+            value: config/overlays/images/gradients/gradient_bottom.png
+    optional:
+      - overlay_level
+      - builder_level
+      - use_<<key>>
+    run_definition:
+      - <<use_<<key>>>>
+    builder_level: <<builder_level>>
+    plex_all: true
+    overlay:
+      name: <<overlay_name>>
+      file: <<file>>
+
+overlays:
+  gradient_top:
+    variables: { key: gradient_top }
+    template: [ name: backdrop ]
+  gradient_bottom:
+    variables: { key: gradient_bottom }
+    template: [ name: backdrop ]
+
+  DV:
+    variables: { key: DV, weight: 220, type: video }
+    template: [ name: standard, name: codec_info ]
+  HDR:
+    variables: { key: HDR, weight: 230, type: video }
+    template: [ name: standard, name: codec_info ]
+  Plus:
+    variables: { key: Plus, weight: 240, type: video }
+    template: [ name: standard, name: codec_info ]
+  DV-HDR:
+    variables: { key: DV-HDR, weight: 250, type: video }
+    template: [ name: standard, name: codec_info ]
+  DV-Plus:
+    variables: { key: DV-Plus, weight: 260, type: video }
+    template: [ name: standard, name: codec_info ]
+  DigitalPlus:
+    variables: { key: DigitalPlus, weight: 270, type: audio }
+    template: [ name: standard, name: codec_info ]
+  DTS-HD:
+    variables: { key: DTS-HD, weight: 280, type: audio }
+    template: [ name: standard, name: codec_info ]
+  Atmos:
+    variables: { key: Atmos, weight: 290, type: audio }
+    template: [ name: standard, name: codec_info ]
+  TrueHD-Atmos:
+    variables: { key: TrueHD-Atmos, weight: 300, type: audio }
+    template: [ name: standard, name: codec_info ]
+  DV-DigitalPlus:
+    variables: { key: DV-DigitalPlus, weight: 310, type: combined }
+    template: [ name: standard, name: codec_info ]
+  HDR-DigitalPlus:
+    variables: { key: HDR-DigitalPlus, weight: 320, type: combined }
+    template: [ name: standard, name: codec_info ]
+  Plus-DigitalPlus:
+    variables: { key: Plus-DigitalPlus, weight: 330, type: combined }
+    template: [ name: standard, name: codec_info ]
+  DV-HDR-DigitalPlus:
+    variables: { key: DV-HDR-DigitalPlus, weight: 340, type: combined }
+    template: [ name: standard, name: codec_info ]
+  DV-Plus-DigitalPlus:
+    variables: { key: DV-Plus-DigitalPlus, weight: 350, type: combined }
+    template: [ name: standard, name: codec_info ]
+  DV-DTS-HD:
+    variables: { key: DV-DTS-HD, weight: 360, type: combined }
+    template: [ name: standard, name: codec_info ]
+  HDR-DTS-HD:
+    variables: { key: HDR-DTS-HD, weight: 370, type: combined }
+    template: [ name: standard, name: codec_info ]
+  Plus-DTS-HD:
+    variables: { key: Plus-DTS-HD, weight: 380, type: combined }
+    template: [ name: standard, name: codec_info ]
+  DV-HDR-DTS-HD:
+    variables: { key: DV-HDR-DTS-HD, weight: 390, type: combined }
+    template: [ name: standard, name: codec_info ]
+  DV-Plus-DTS-HD:
+    variables: { key: DV-Plus-DTS-HD, weight: 400, type: combined }
+    template: [ name: standard, name: codec_info ]
+  DV-Atmos:
+    variables: { key: DV-Atmos, weight: 410, type: combined }
+    template: [ name: standard, name: codec_info ]
+  HDR-Atmos:
+    variables: { key: HDR-Atmos, weight: 420, type: combined }
+    template: [ name: standard, name: codec_info ]
+  Plus-Atmos:
+    variables: { key: Plus-Atmos, weight: 430, type: combined }
+    template: [ name: standard, name: codec_info ]
+  DV-HDR-Atmos:
+    variables: { key: DV-HDR-Atmos, weight: 440, type: combined }
+    template: [ name: standard, name: codec_info ]
+  DV-Plus-Atmos:
+    variables: { key: DV-Plus-Atmos, weight: 450, type: combined }
+    template: [ name: standard, name: codec_info ]
+  DV-TrueHD-Atmos:
+    variables: { key: DV-TrueHD-Atmos, weight: 460, type: combined }
+    template: [ name: standard, name: codec_info ]
+  HDR-TrueHD-Atmos:
+    variables: { key: HDR-TrueHD-Atmos, weight: 470, type: combined }
+    template: [ name: standard, name: codec_info ]
+  Plus-TrueHD-Atmos:
+    variables: { key: Plus-TrueHD-Atmos, weight: 480, type: combined }
+    template: [ name: standard, name: codec_info ]
+  DV-HDR-TrueHD-Atmos:
+    variables: { key: DV-HDR-TrueHD-Atmos, weight: 490, type: combined }
+    template: [ name: standard, name: codec_info ]
+  DV-Plus-TrueHD-Atmos:
+    variables: { key: DV-Plus-TrueHD-Atmos, weight: 500, type: combined }
+    template: [ name: standard, name: codec_info ]
+
+  1080P:
+    variables: { key: 1080P, weight: 490, type: resolution }
+    template: [ name: standard, name: resolution_info ]
+  Ultra-HD:
+    variables: { key: Ultra-HD, weight: 500, type: resolution }
+    template: [ name: standard, name: resolution_info ]
+
+  IMAX-1080p:
+    variables: { key: IMAX, res: 1080p, weight: 420, allowed_libraries: movie, type: edition }
+    template: [ name: standard, name: edition_info ]
+  Unrated-Edition-1080p:
+    variables: { key: Unrated-Edition, res: 1080p, weight: 430, allowed_libraries: movie, type: edition }
+    template: [ name: standard, name: edition_info ]
+  Directors-Cut-1080p:
+    variables: { key: Directors-Cut, res: 1080p, weight: 440, allowed_libraries: movie, type: edition }
+    template: [ name: standard, name: edition_info ]
+  Special-Edition-1080p:
+    variables: { key: Special-Edition, res: 1080p, weight: 450, allowed_libraries: movie, type: edition }
+    template: [ name: standard, name: edition_info ]
+  Anniversary-Edition-1080p:
+    variables: { key: Anniversary-Edition, res: 1080p, weight: 460, allowed_libraries: movie, type: edition }
+    template: [ name: standard, name: edition_info ]
+  Collectors-Edition-1080p:
+    variables: { key: Collectors-Edition, res: 1080p, weight: 470, allowed_libraries: movie, type: edition }
+    template: [ name: standard, name: edition_info ]
+  Minus-Color-1080p:
+    variables: { key: Minus-Color, res: 1080p, weight: 480, allowed_libraries: movie, type: edition }
+    template: [ name: standard, name: edition_info ]
+  Extended-Cut-1080p:
+    variables: { key: Extended-Cut, res: 1080p, weight: 490, allowed_libraries: movie, type: edition }
+    template: [ name: standard, name: edition_info ]
+  Extended-Edition-1080p:
+    variables: { key: Extended-Edition, res: 1080p, weight: 500, allowed_libraries: movie, type: edition }
+    template: [ name: standard, name: edition_info ]
+
+  IMAX-4K:
+    variables: { key: IMAX, res: 4K, weight: 420, allowed_libraries: movie, type: edition }
+    template: [ name: standard, name: edition_info ]
+  Unrated-Edition-4K:
+    variables: { key: Unrated-Edition, res: 4K, weight: 430, allowed_libraries: movie, type: edition }
+    template: [ name: standard, name: edition_info ]
+  Directors-Cut-4K:
+    variables: { key: Directors-Cut, res: 4K, weight: 440, allowed_libraries: movie, type: edition }
+    template: [ name: standard, name: edition_info ]
+  Special-Edition-4K:
+    variables: { key: Special-Edition, res: 4K, weight: 450, allowed_libraries: movie, type: edition }
+    template: [ name: standard, name: edition_info ]
+  Anniversary-Edition-4K:
+    variables: { key: Anniversary-Edition, res: 4K, weight: 460, allowed_libraries: movie, type: edition }
+    template: [ name: standard, name: edition_info ]
+  Collectors-Edition-4K:
+    variables: { key: Collectors-Edition, res: 4K, weight: 470, allowed_libraries: movie, type: edition }
+    template: [ name: standard, name: edition_info ]
+  Minus-Color-4K:
+    variables: { key: Minus-Color, res: 4K, weight: 480, allowed_libraries: movie, type: edition }
+    template: [ name: standard, name: edition_info ]
+  Extended-Cut-4K:
+    variables: { key: Extended-Cut, res: 4K, weight: 490, allowed_libraries: movie, type: edition }
+    template: [ name: standard, name: edition_info ]
+  Extended-Edition-4K:
+    variables: { key: Extended-Edition, res: 4K, weight: 500, allowed_libraries: movie, type: edition }
+    template: [ name: standard, name: edition_info ]
