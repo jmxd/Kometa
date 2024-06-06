@@ -102,11 +102,11 @@ overlay_files:
 > [!IMPORTANT]
 > When running the overlay file multiple times on the same library like the above example, make sure to disable both gradients on subsequent uses or it will apply them again.
 
-----------
-<img align="left" height="50px" src="https://i.imgur.com/YzGqu5U.png">
-<img align="right" height="50px" src="https://i.imgur.com/Ip6nj8m.png">
-<div style="clear: both;"></div>
-
-----------
+<br />
 
 ### ☕ [buymeacoffee.com/jmxd](https://buymeacoffee.com/jmxd)
+
+<br /><br />
+
+<img align="left" height="50px" src="https://i.imgur.com/YzGqu5U.png">
+<img align="right" height="50px" src="https://i.imgur.com/Ip6nj8m.png">
