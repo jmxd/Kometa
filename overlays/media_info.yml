@@ -230,8 +230,6 @@ templates:
       filepath.regex: <<regex>>
 
   backdrop:
-    default:
-      builder_level: <<builder_level>>
     conditionals:
       file:
         conditions:
@@ -246,7 +244,6 @@ templates:
           - key: gradient_bottom
             value: config/overlays/images/gradients/gradient_bottom.png
     optional:
-      - overlay_level
       - builder_level
       - use_<<key>>
     run_definition:
