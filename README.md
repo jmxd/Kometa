@@ -90,7 +90,7 @@ overlay_files:
       video_only: true
       use_gradient_top: false
       file_DV-HDR: config/overlays/images/media_info/codec/DV-HDR_extended.png
-      file_DV-Plus: config/overlays/images//media_info/codec/DV-Plus_extended.png
+      file_DV-Plus: config/overlays/images/media_info/codec/DV-Plus_extended.png
   - file: config/overlays/media_info.yml
     template_variables:
       builder_level: episode
