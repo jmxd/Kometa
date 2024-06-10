@@ -204,7 +204,7 @@ templates:
           - key: Unrated-Edition
             value: '(?i)\{edition-Unrated[^}]*\}'
           - key: Directors-Cut
-            value: '(?i)\{edition-Director[^}]*\}'
+            value: '(?i)\{edition-(Director|Ultimate Director)[^}]*\}'
           - key: Special-Edition
             value: '(?i)\{edition-Special[^}]*\}'
           - key: Anniversary-Edition
@@ -231,6 +231,10 @@ templates:
             value: '(?i)\{edition-Theatrical(?! Cut)[^}]*\}'
           - key: Theatrical-Cut
             value: '(?i)\{edition-Theatrical Cut[^}]*\}'
+          - key: Uncut
+            value: '(?i)\{edition-Uncut[^}]*\}'
+          - key: Ultimate-Edition
+            value: '(?i)\{edition-Ultimate(?! Director)[^}]*\}'
     optional:
       - use_<<type>>
       - allowed_libraries
@@ -419,6 +423,12 @@ overlays:
   Theatrical-Cut-1080p:
     variables: { key: Theatrical-Cut, res: 1080p, weight: 570, allowed_libraries: movie, type: edition }
     template: [ name: standard, name: edition_info ]
+  Uncut-1080p:
+    variables: { key: Uncut, res: 1080p, weight: 580, allowed_libraries: movie, type: edition }
+    template: [ name: standard, name: edition_info ]
+  Ultimate-Edition-1080p:
+    variables: { key: Ultimate-Edition, res: 1080p, weight: 590, allowed_libraries: movie, type: edition }
+    template: [ name: standard, name: edition_info ]
 
   IMAX-4K:
     variables: { key: IMAX, res: 4K, weight: 420, allowed_libraries: movie, type: edition }
@@ -467,4 +477,10 @@ overlays:
     template: [ name: standard, name: edition_info ]
   Theatrical-Cut-4K:
     variables: { key: Theatrical-Cut, res: 4K, weight: 570, allowed_libraries: movie, type: edition }
+    template: [ name: standard, name: edition_info ]
+  Uncut-4K:
+    variables: { key: Uncut, res: 4K, weight: 580, allowed_libraries: movie, type: edition }
+    template: [ name: standard, name: edition_info ]
+  Ultimate-Edition-4K:
+    variables: { key: Ultimate-Edition, res: 4K, weight: 590, allowed_libraries: movie, type: edition }
     template: [ name: standard, name: edition_info ]
