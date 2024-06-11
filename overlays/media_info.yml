@@ -204,11 +204,11 @@ templates:
           - key: Unrated-Edition
             value: '(?i)\{edition-Unrated[^}]*\}'
           - key: Directors-Cut
-            value: '(?i)\{edition-Director[^}]*\}'
+            value: '(?i)\{edition-(Director|Ultimate Director)[^}]*\}'
           - key: Special-Edition
             value: '(?i)\{edition-Special[^}]*\}'
           - key: Anniversary-Edition
-            value: '(?i)\{edition-Anniversary[^}]*\}'
+            value: '(?i)\{edition-\d+th Anniversary[^}]*\}'
           - key: Collectors-Edition
             value: '(?i)\{edition-Collector[^}]*\}'
           - key: Minus-Color
@@ -216,7 +216,25 @@ templates:
           - key: Extended-Cut
             value: '(?i)\{edition-Extended Cut[^}]*\}'
           - key: Extended-Edition
-            value: '(?i)\{edition-Extended Edition[^}]*\}'
+            value: '(?i)\{edition-Extended(?! Cut)[^}]*\}'
+          - key: Open-Matte
+            value: '(?i)\{edition-Open Matte[^}]*\}'
+          - key: Final-Cut
+            value: '(?i)\{edition-Final Cut[^}]*\}'
+          - key: Remastered
+            value: '(?i)\{edition-Remastered[^}]*\}'
+          - key: Restored
+            value: '(?i)\{edition-Restored[^}]*\}'
+          - key: Signature-Edition
+            value: '(?i)\{edition-Signature[^}]*\}'
+          - key: Theatrical
+            value: '(?i)\{edition-Theatrical(?! Cut)[^}]*\}'
+          - key: Theatrical-Cut
+            value: '(?i)\{edition-Theatrical Cut[^}]*\}'
+          - key: Uncut
+            value: '(?i)\{edition-Uncut[^}]*\}'
+          - key: Ultimate-Edition
+            value: '(?i)\{edition-Ultimate(?! Director)[^}]*\}'
     optional:
       - use_<<type>>
       - allowed_libraries
@@ -384,6 +402,33 @@ overlays:
   Extended-Edition-1080p:
     variables: { key: Extended-Edition, res: 1080p, weight: 500, allowed_libraries: movie, type: edition }
     template: [ name: standard, name: edition_info ]
+  Open-Matte-1080p:
+    variables: { key: Open-Matte, res: 1080p, weight: 510, allowed_libraries: movie, type: edition }
+    template: [ name: standard, name: edition_info ]
+  Final-Cut-1080p:
+    variables: { key: Final-Cut, res: 1080p, weight: 520, allowed_libraries: movie, type: edition }
+    template: [ name: standard, name: edition_info ]
+  Remastered-1080p:
+    variables: { key: Remastered, res: 1080p, weight: 530, allowed_libraries: movie, type: edition }
+    template: [ name: standard, name: edition_info ]
+  Restored-1080p:
+    variables: { key: Restored, res: 1080p, weight: 540, allowed_libraries: movie, type: edition }
+    template: [ name: standard, name: edition_info ]
+  Signature-Edition-1080p:
+    variables: { key: Signature-Edition, res: 1080p, weight: 550, allowed_libraries: movie, type: edition }
+    template: [ name: standard, name: edition_info ]
+  Theatrical-1080p:
+    variables: { key: Theatrical, res: 1080p, weight: 560, allowed_libraries: movie, type: edition }
+    template: [ name: standard, name: edition_info ]
+  Theatrical-Cut-1080p:
+    variables: { key: Theatrical-Cut, res: 1080p, weight: 570, allowed_libraries: movie, type: edition }
+    template: [ name: standard, name: edition_info ]
+  Uncut-1080p:
+    variables: { key: Uncut, res: 1080p, weight: 580, allowed_libraries: movie, type: edition }
+    template: [ name: standard, name: edition_info ]
+  Ultimate-Edition-1080p:
+    variables: { key: Ultimate-Edition, res: 1080p, weight: 590, allowed_libraries: movie, type: edition }
+    template: [ name: standard, name: edition_info ]
 
   IMAX-4K:
     variables: { key: IMAX, res: 4K, weight: 420, allowed_libraries: movie, type: edition }
@@ -411,4 +456,31 @@ overlays:
     template: [ name: standard, name: edition_info ]
   Extended-Edition-4K:
     variables: { key: Extended-Edition, res: 4K, weight: 500, allowed_libraries: movie, type: edition }
+    template: [ name: standard, name: edition_info ]
+  Open-Matte-4K:
+    variables: { key: Open-Matte, res: 4K, weight: 510, allowed_libraries: movie, type: edition }
+    template: [ name: standard, name: edition_info ]
+  Final-Cut-4K:
+    variables: { key: Final-Cut, res: 4K, weight: 520, allowed_libraries: movie, type: edition }
+    template: [ name: standard, name: edition_info ]
+  Remastered-4K:
+    variables: { key: Remastered, res: 4K, weight: 530, allowed_libraries: movie, type: edition }
+    template: [ name: standard, name: edition_info ]
+  Restored-4K:
+    variables: { key: Restored, res: 4K, weight: 540, allowed_libraries: movie, type: edition }
+    template: [ name: standard, name: edition_info ]
+  Signature-Edition-4K:
+    variables: { key: Signature-Edition, res: 4K, weight: 550, allowed_libraries: movie, type: edition }
+    template: [ name: standard, name: edition_info ]
+  Theatrical-4K:
+    variables: { key: Theatrical, res: 4K, weight: 560, allowed_libraries: movie, type: edition }
+    template: [ name: standard, name: edition_info ]
+  Theatrical-Cut-4K:
+    variables: { key: Theatrical-Cut, res: 4K, weight: 570, allowed_libraries: movie, type: edition }
+    template: [ name: standard, name: edition_info ]
+  Uncut-4K:
+    variables: { key: Uncut, res: 4K, weight: 580, allowed_libraries: movie, type: edition }
+    template: [ name: standard, name: edition_info ]
+  Ultimate-Edition-4K:
+    variables: { key: Ultimate-Edition, res: 4K, weight: 590, allowed_libraries: movie, type: edition }
     template: [ name: standard, name: edition_info ]
