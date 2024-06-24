@@ -247,15 +247,10 @@ templates:
       resolution: <<res>>
       filepath.regex: <<regex>>
 
-  backdrop:
+  backdrop_bottom:
     conditionals:
       file:
         conditions:
-          - key: gradient_top
-            builder_level: episode
-            value: config/overlays/images/gradients/gradient_episode_top.png
-          - key: gradient_top
-            value: config/overlays/images/gradients/gradient_top.png
           - key: gradient_bottom
             builder_level: episode
             value: config/overlays/images/gradients/gradient_episode_bottom.png
@@ -268,6 +263,59 @@ templates:
       - <<use_<<key>>>>
     builder_level: <<builder_level>>
     plex_all: true
+    filters:
+      filepath.regex:
+        - '(?i)\[(?!.*HDR)(DV)\]'
+        - '(?i)\[(HDR10)\]'
+        - '(?i)\[(HDR10Plus)\]'
+        - '(?i)\[(EAC3( 5\.1)?)\]'
+        - '(?i)\[(DTS-HD MA(?: 5\.1| 7\.1)?)\]'
+        - '(?i)\[(EAC3 Atmos( 5\.1)?)\]'
+        - '(?i)\[(TrueHD Atmos( 7\.1)?)\]'
+        - '(?i)\[(DV HDR10)\]'
+        - '(?i)\[(DV HDR10Plus)\]'
+        - '(?i)\[(?!.*HDR)(DV)\].*\[(EAC3( 5\.1)?)\]'
+        - '(?i)\[(HDR10)\].*\[(EAC3( 5\.1)?)\]'
+        - '(?i)\[(HDR10Plus)\].*\[(EAC3( 5\.1)?)\]'
+        - '(?i)\[(DV HDR10)\].*\[(EAC3( 5\.1)?)\]'
+        - '(?i)\[(DV HDR10Plus)\].*\[(EAC3( 5\.1)?)\]'
+        - '(?i)\[(?!.*HDR)(DV)\].*\[(DTS-HD MA(?: 5\.1| 7\.1)?)\]'
+        - '(?i)\[(HDR10)\].*\[(DTS-HD MA(?: 5\.1| 7\.1)?)\]'
+        - '(?i)\[(HDR10Plus)\].*\[(DTS-HD MA(?: 5\.1| 7\.1)?)\]'
+        - '(?i)\[(DV HDR10)\].*\[(DTS-HD MA(?: 5\.1| 7\.1)?)\]'
+        - '(?i)\[(DV HDR10Plus)\].*\[(DTS-HD MA(?: 5\.1| 7\.1)?)\]'
+        - '(?i)\[(?!.*HDR)(DV)\].*\[(EAC3 Atmos( 5\.1)?)\]'
+        - '(?i)\[(HDR10)\].*\[(EAC3 Atmos( 5\.1)?)\]'
+        - '(?i)\[(HDR10Plus)\].*\[(EAC3 Atmos( 5\.1)?)\]'
+        - '(?i)\[(DV HDR10)\].*\[(EAC3 Atmos( 5\.1)?)\]'
+        - '(?i)\[(DV HDR10Plus)\].*\[(EAC3 Atmos( 5\.1)?)\]'
+        - '(?i)\[(?!.*HDR)(DV)\].*\[(TrueHD Atmos( 7\.1)?)\]'
+        - '(?i)\[(HDR10)\].*\[(TrueHD Atmos( 7\.1)?)\]'
+        - '(?i)\[(HDR10Plus)\].*\[(TrueHD Atmos( 7\.1)?)\]'
+        - '(?i)\[(DV HDR10)\].*\[(TrueHD Atmos( 7\.1)?)\]'
+        - '(?i)\[(DV HDR10Plus)\].*\[(TrueHD Atmos( 7\.1)?)\]'
+    overlay:
+      name: <<overlay_name>>
+      file: <<file>>     
+
+  backdrop_top:
+    conditionals:
+      file:
+        conditions:
+          - key: gradient_top
+            builder_level: episode
+            value: config/overlays/images/gradients/gradient_episode_top.png
+          - key: gradient_top
+            value: config/overlays/images/gradients/gradient_top.png
+    optional:
+      - builder_level
+      - use_<<key>>
+    run_definition:
+      - <<use_<<key>>>>
+    builder_level: <<builder_level>>
+    plex_all: true
+    filters:
+      filepath.regex: (?i)\[(?:.*-)?((?:2160p|1080p)(?:\s+\w+)?)(?=\])
     overlay:
       name: <<overlay_name>>
       file: <<file>>
@@ -275,10 +323,10 @@ templates:
 overlays:
   gradient_top:
     variables: { key: gradient_top }
-    template: [ name: backdrop ]
+    template: [ name: backdrop_top ]
   gradient_bottom:
     variables: { key: gradient_bottom }
-    template: [ name: backdrop ]
+    template: [ name: backdrop_bottom ]
 
   DV:
     variables: { key: DV, weight: 220, type: video }
