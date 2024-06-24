@@ -69,12 +69,14 @@ external_templates:
               - DV-Plus
               - DigitalPlus
               - DTS-HD
+              - DTS-X
               - Atmos
               - TrueHD-Atmos
           - type: video
             value:
               - DigitalPlus
               - DTS-HD
+              - DTS-X
               - Atmos
               - TrueHD-Atmos
           - type: audio
@@ -121,6 +123,8 @@ templates:
             value: '(?i)\[(EAC3( 5\.1)?)\]'
           - key: DTS-HD
             value: '(?i)\[(DTS-HD MA(?: 5\.1| 7\.1)?)\]'
+          - key: DTS-X
+            value: '(?i)\[(DTS-X(?: 5\.1| 7\.1)?)\]'
           - key: Atmos
             value: '(?i)\[(EAC3 Atmos( 5\.1)?)\]'
           - key: TrueHD-Atmos
@@ -149,6 +153,16 @@ templates:
             value: '(?i)\[(DV HDR10)\].*\[(DTS-HD MA(?: 5\.1| 7\.1)?)\]'
           - key: DV-Plus-DTS-HD
             value: '(?i)\[(DV HDR10Plus)\].*\[(DTS-HD MA(?: 5\.1| 7\.1)?)\]'
+          - key: DV-DTS-X
+            value: '(?i)\[(?!.*HDR)(DV)\].*\[(DTS-X(?: 5\.1| 7\.1)?)\]'
+          - key: HDR-DTS-X
+            value: '(?i)\[(HDR10)\].*\[(DTS-X(?: 5\.1| 7\.1)?)\]'
+          - key: Plus-DTS-X
+            value: '(?i)\[(HDR10Plus)\].*\[(DTS-X(?: 5\.1| 7\.1)?)\]'
+          - key: DV-HDR-DTS-X
+            value: '(?i)\[(DV HDR10)\].*\[(DTS-X(?: 5\.1| 7\.1)?)\]'
+          - key: DV-Plus-DTS-X
+            value: '(?i)\[(DV HDR10Plus)\].*\[(DTS-X(?: 5\.1| 7\.1)?)\]'
           - key: DV-Atmos
             value: '(?i)\[(?!.*HDR)(DV)\].*\[(EAC3 Atmos( 5\.1)?)\]'
           - key: HDR-Atmos
@@ -304,6 +318,9 @@ overlays:
   Atmos:
     variables: { key: Atmos, weight: 290, type: audio }
     template: [ name: standard, name: codec_info ]
+  DTS-X:
+    variables: { key: DTS-X, weight: 300, type: audio }
+    template: [ name: standard, name: codec_info ]
   TrueHD-Atmos:
     variables: { key: TrueHD-Atmos, weight: 300, type: audio }
     template: [ name: standard, name: codec_info ]
@@ -351,6 +368,21 @@ overlays:
     template: [ name: standard, name: codec_info ]
   DV-Plus-Atmos:
     variables: { key: DV-Plus-Atmos, weight: 450, type: combined }
+    template: [ name: standard, name: codec_info ]
+  DV-DTS-X:
+    variables: { key: DV-DTS-X, weight: 460, type: combined }
+    template: [ name: standard, name: codec_info ]
+  HDR-DTS-X:
+    variables: { key: HDR-DTS-X, weight: 470, type: combined }
+    template: [ name: standard, name: codec_info ]
+  Plus-DTS-X:
+    variables: { key: Plus-DTS-X, weight: 480, type: combined }
+    template: [ name: standard, name: codec_info ]
+  DV-HDR-DTS-X:
+    variables: { key: DV-HDR-DTS-X, weight: 490, type: combined }
+    template: [ name: standard, name: codec_info ]
+  DV-Plus-DTS-X:
+    variables: { key: DV-Plus-DTS-X, weight: 500, type: combined }
     template: [ name: standard, name: codec_info ]
   DV-TrueHD-Atmos:
     variables: { key: DV-TrueHD-Atmos, weight: 460, type: combined }
