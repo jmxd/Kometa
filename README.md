@@ -28,13 +28,14 @@ Below is an example of what this builder will create.
 | -           | -                   | -                     | -                  |
 | 2160p (4K)  | Anniversary Edition | HDR                   | Dolby Digital Plus |
 | 1080p (HD)  | Collector's Edition | HDR10+                | DTS-HD MA          |
-|             | Director's Cut      | Dolby Vision          | Dolby Atmos        |
-|             | Extended Cut        | Dolby Vision + HDR    | Dolby TrueHD Atmos |
-|             | Extended Edition    | Dolby Vision + HDR10+ |                    |
-|             | IMAX / (Enhanced)   |                       |                    |
+|             | Director's Cut      | Dolby Vision          | DTS-X              |
+|             | Extended Cut        | Dolby Vision + HDR    | Dolby Atmos        |
+|             | Extended Edition    | Dolby Vision + HDR10+ | Dolby TrueHD       |
+|             | IMAX / (Enhanced)   |                       | Dolby TrueHD Atmos |
 |             | Minus Color         |                       |                    |
 |             | Special Edition     |                       |                    |
 |             | Unrated Edition     |                       |                    |
+|             | ... & more          |                       |                    |
 
 > [!NOTE]
 > Only "High Quality" formats are intended to be supported.
