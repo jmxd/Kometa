@@ -208,20 +208,27 @@ templates:
 
   resolution_info:
     conditionals:
-      regex:
+      suppress_overlays:
+        conditions:
+          - use_<<key>>.exists: true
+            value:
+              - <<key>>
+      resolution:
         conditions:
           - key: 1080P
-            value: '(?i)\[(?:.*-)?(1080p(?:\s+\w+)?)(?=\])'
+            value: 1080p
           - key: Ultra-HD
-            value: '(?i)\[(?:.*-)?(2160p(?:\s+\w+)?)(?=\])'
+            value: 4k
     optional:
+      - use_<<key>>
       - use_<<type>>
     run_definition:
+      - <<use_<<key>>>>
       - <<use_<<type>>>>
     ignore_blank_results: true
-    plex_all: true
-    filters:
-      filepath.regex: <<regex>>
+    plex_search:
+      all:
+        resolution: <<resolution>>
 
   edition_info:
     conditionals:
