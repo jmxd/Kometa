@@ -71,7 +71,7 @@ external_templates:
               - DTS-HD
               - DTS-X
               - Atmos
-              - True-HD
+              - TrueHD
               - TrueHD-Atmos
           - type: video
             value:
@@ -127,7 +127,7 @@ templates:
             value: '(?i)\[(DTS-HD MA(?: 5\.1| 7\.1)?)\]'
           - key: DTS-X
             value: '(?i)\[(DTS-X(?: 5\.1| 7\.1)?)\]'
-          - key: True-HD
+          - key: TrueHD
             value: '(?i)\[(?!.*Atmos)TrueHD\]'
           - key: Atmos
             value: '(?i)\[(EAC3 Atmos( 5\.1)?)\]'
