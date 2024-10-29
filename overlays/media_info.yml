@@ -343,7 +343,7 @@ overlays:
     variables: { key: Atmos, weight: 290, type: audio }
     template: [ name: standard, name: codec_info ]
   TrueHD:
-    variables: { key: Atmos, weight: 295, type: audio }
+    variables: { key: TrueHD, weight: 295, type: audio }
     template: [ name: standard, name: codec_info ]
   TrueHD-Atmos:
     variables: { key: TrueHD-Atmos, weight: 300, type: audio }
