@@ -48,32 +48,32 @@ templates:
       back_width: 140
       back_height: 80
       back_align: center
-      font_color: "#111111"
+      font_color: <<font_color>>
       font: config/overlays/fonts/AvenirNextLTPro-Bold.ttf
       font_size: 68
 
 overlays:
   audience_score_super_high_backdrop:
-    variables: { key: audience_score_super_high_backdrop, weight: 600, group: backdrop }
+    variables: { key: audience_score_super_high_backdrop, weight: 600, group: backdrop, font_color: "#F8F8FF" }
     template: [ name: audience_score ]
   audience_score_high_backdrop:
-    variables: { key: audience_score_high_backdrop, weight: 500, group: backdrop }
+    variables: { key: audience_score_high_backdrop, weight: 500, group: backdrop, font_color: "#111111" }
     template: [ name: audience_score ]
   audience_score_mid_backdrop:
-    variables: { key: audience_score_mid_backdrop, weight: 400, group: backdrop }
+    variables: { key: audience_score_mid_backdrop, weight: 400, group: backdrop, font_color: "#111111" }
     template: [ name: audience_score ]
   audience_score_low_backdrop:
-    variables: { key: audience_score_low_backdrop, weight: 300, group: backdrop }
+    variables: { key: audience_score_low_backdrop, weight: 300, group: backdrop, font_color: "#111111" }
     template: [ name: audience_score ]
   audience_score_super_high:
-    variables: { key: audience_score_super_high, weight: 600, group: score }
+    variables: { key: audience_score_super_high, weight: 600, group: score, font_color: "#F8F8FF" }
     template: [ name: audience_score ]
   audience_score_high:
-    variables: { key: audience_score_high, weight: 500, group: score }
+    variables: { key: audience_score_high, weight: 500, group: score, font_color: "#111111" }
     template: [ name: audience_score ]
   audience_score_mid:
-    variables: { key: audience_score_mid, weight: 400, group: score }
+    variables: { key: audience_score_mid, weight: 400, group: score, font_color: "#111111" }
     template: [ name: audience_score ]
   audience_score_low:
-    variables: { key: audience_score_low, weight: 300, group: score }
+    variables: { key: audience_score_low, weight: 300, group: score, font_color: "#111111" }
     template: [ name: audience_score ]
