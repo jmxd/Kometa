@@ -8,6 +8,8 @@ templates:
     conditionals:
       files:
         conditions:
+          - key: audience_score_super_high_backdrop
+            value: config/overlays/images/audience_score/audience_score_super_high.png
           - key: audience_score_high_backdrop
             value: config/overlays/images/audience_score/audience_score_high.png
           - key: audience_score_mid_backdrop
@@ -16,16 +18,18 @@ templates:
             value: config/overlays/images/audience_score/audience_score_low.png
       audience_rating.gte:
         conditions:
-          - key: [audience_score_high, audience_score_high_backdrop]
+          - key: [audience_score_super_high, audience_score_super_high_backdrop]
             value: 8.0
+          - key: [audience_score_high, audience_score_high_backdrop]
+            value: 7.0
           - key: [audience_score_mid, audience_score_mid_backdrop]
-            value: 6.0
+            value: 5.0
           - key: [audience_score_low, audience_score_low_backdrop]
             value: 0
       names:
         default: <<overlay_name>>
         conditions:
-          - key: [audience_score_high, audience_score_mid, audience_score_low]
+          - key: [audience_score_super_high, audience_score_high, audience_score_mid, audience_score_low]
             value: text(<<audience_rating>>)
     optional:
       - file
@@ -49,6 +53,9 @@ templates:
       font_size: 68
 
 overlays:
+  audience_score_super_high_backdrop:
+    variables: { key: audience_score_super_high_backdrop, weight: 600, group: backdrop }
+    template: [ name: audience_score ]
   audience_score_high_backdrop:
     variables: { key: audience_score_high_backdrop, weight: 500, group: backdrop }
     template: [ name: audience_score ]
@@ -57,6 +64,9 @@ overlays:
     template: [ name: audience_score ]
   audience_score_low_backdrop:
     variables: { key: audience_score_low_backdrop, weight: 300, group: backdrop }
+    template: [ name: audience_score ]
+  audience_score_super_high:
+    variables: { key: audience_score_super_high, weight: 600, group: score }
     template: [ name: audience_score ]
   audience_score_high:
     variables: { key: audience_score_high, weight: 500, group: score }
