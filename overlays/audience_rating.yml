@@ -1,3 +1,6 @@
+external_templates:
+  default: templates
+
 templates:
   audience_score:
     default:
@@ -29,9 +32,11 @@ templates:
             value: text(<<audience_rating>>)
     optional:
       - file
+      - builder_level
     plex_all: true
     filters:
       audience_rating.gte: <<audience_rating.gte>>
+    builder_level: <<builder_level>>
     overlay:
       name: <<names>>
       group: <<group>>
