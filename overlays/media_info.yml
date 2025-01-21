@@ -128,7 +128,7 @@ templates:
           - key: DTS-X
             value: '(?i)\[(DTS-X(?: 5\.1| 7\.1)?)\]'
           - key: TrueHD
-            value: '(?i)\[(?![^\]]*Atmos)[^\]]*TrueHD( 7\.1)?\]'
+            value: '(?i)\[(?![^\]]*Atmos)[^\]]*TrueHD(?: 5\.1| 7\.1)?)\]'
           - key: Atmos
             value: '(?i)\[(EAC3 Atmos( 5\.1)?)\]'
           - key: TrueHD-Atmos
