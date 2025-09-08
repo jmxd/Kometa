@@ -116,7 +116,7 @@ templates:
       regex:
         conditions:
           - key: DV
-            value: '(?i)(?!HDR10Plus)(?!HDR10)]*DV'
+            value: '(?i)(?!HDR10Plus)(?!HDR10)(\bDV\b)'
           - key: HDR
             value: '(?i)HDR10'
           - key: Plus
@@ -138,7 +138,7 @@ templates:
           - key: DV-Plus
             value: '(?i)DV[ .]HDR10Plus'
           - key: DV-DigitalPlus
-            value: '(?i)(?=.*(?!HDR10Plus)(?!HDR10)DV)(?=.*EAC3(?:[ .]5\.1[ .]7\.1)?)'
+            value: '(?i)(?=.*(?!HDR10Plus)(?!HDR10)(\bDV\b))(?=.*EAC3(?:[ .]5\.1[ .]7\.1)?)'
           - key: HDR-DigitalPlus
             value: '(?i)(?=.*HDR10)(?=.*EAC3(?:[ .]5\.1[ .]7\.1)?)'
           - key: Plus-DigitalPlus
@@ -148,7 +148,7 @@ templates:
           - key: DV-Plus-DigitalPlus
             value: '(?i)(?=.*DV[ .]HDR10Plus)(?=.*EAC3(?:[ .]5\.1[ .]7\.1)?)'
           - key: DV-DTS-HD
-            value: '(?i)(?=.*(?!HDR10Plus)(?!HDR10)DV)(?=.*DTS-HD[ .]MA(?:[ .]5\.1[ .]7\.1)?)'
+            value: '(?i)(?=.*(?!HDR10Plus)(?!HDR10)(\bDV\b))(?=.*DTS-HD[ .]MA(?:[ .]5\.1[ .]7\.1)?)'
           - key: HDR-DTS-HD
             value: '(?i)(?=.*HDR10)(?=.*DTS-HD[ .]MA(?:[ .]5\.1[ .]7\.1)?)'
           - key: Plus-DTS-HD
@@ -158,7 +158,7 @@ templates:
           - key: DV-Plus-DTS-HD
             value: '(?i)(?=.*DV[ .]HDR10Plus)(?=.*DTS-HD[ .]MA(?:[ .]5\.1[ .]7\.1)?)'
           - key: DV-DTS-X
-            value: '(?i)(?=.*(?!HDR10Plus)(?!HDR10)DV)(?=.*DTS-X(?:[ .]5\.1[ .]7\.1)?)'
+            value: '(?i)(?=.*(?!HDR10Plus)(?!HDR10)(\bDV\b))(?=.*DTS-X(?:[ .]5\.1[ .]7\.1)?)'
           - key: HDR-DTS-X
             value: '(?i)(?=.*HDR10)(?=.*DTS-X(?:[ .]5\.1[ .]7\.1)?)'
           - key: Plus-DTS-X
@@ -168,7 +168,7 @@ templates:
           - key: DV-Plus-DTS-X
             value: '(?i)(?=.*DV[ .]HDR10Plus)(?=.*DTS-X(?:[ .]5\.1[ .]7\.1)?)'
           - key: DV-Atmos
-            value: '(?i)(?=.*(?!HDR10Plus)(?!HDR10)DV)(?=.*EAC3[ .]Atmos(?:[ .]5\.1[ .]7\.1)?)'
+            value: '(?i)(?=.*(?!HDR10Plus)(?!HDR10)(\bDV\b))(?=.*EAC3[ .]Atmos(?:[ .]5\.1[ .]7\.1)?)'
           - key: HDR-Atmos
             value: '(?i)(?=.*HDR10)(?=.*EAC3[ .]Atmos(?:[ .]5\.1[ .]7\.1)?)'
           - key: Plus-Atmos
@@ -178,7 +178,7 @@ templates:
           - key: DV-Plus-Atmos
             value: '(?i)(?=.*DV[ .]HDR10Plus)(?=.*EAC3[ .]Atmos(?:[ .]5\.1[ .]7\.1)?)'
           - key: DV-TrueHD
-            value: '(?i)(?=.*(?!HDR10Plus)(?!HDR10)DV)(?=.*(?!Atmos)TrueHD(?:[ .]5\.1[ .]7\.1)?)'
+            value: '(?i)(?=.*(?!HDR10Plus)(?!HDR10)(\bDV\b))(?=.*(?!Atmos)TrueHD(?:[ .]5\.1[ .]7\.1)?)'
           - key: HDR-TrueHD
             value: '(?i)(?=.*HDR10)(?=.*(?!Atmos)TrueHD(?:[ .]5\.1[ .]7\.1)?)'
           - key: Plus-TrueHD
@@ -188,7 +188,7 @@ templates:
           - key: DV-Plus-TrueHD
             value: '(?i)(?=.*DV[ .]HDR10Plus)(?=.*(?!Atmos)TrueHD(?:[ .]5\.1[ .]7\.1)?)'
           - key: DV-TrueHD-Atmos
-            value: '(?i)(?=.*(?!HDR10Plus)(?!HDR10)DV)(?=.*TrueHD[ .]Atmos(?:[ .]5\.1[ .]7\.1)?)'
+            value: '(?i)(?=.*(?!HDR10Plus)(?!HDR10)(\bDV\b))(?=.*TrueHD[ .]Atmos(?:[ .]5\.1[ .]7\.1)?)'
           - key: HDR-TrueHD-Atmos
             value: '(?i)(?=.*HDR10)(?=.*TrueHD[ .]Atmos(?:[ .]5\.1[ .]7\.1)?)'
           - key: Plus-TrueHD-Atmos
