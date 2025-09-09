@@ -27,6 +27,7 @@
 # - use_gradient_top, use_gradient_bottom                                    #
 #     Set to false to disable the backdrop                                   #
 #                                                                            #
+#      Audio/HDR Formats Regex Template https://regex101.com/r/Bw0wX9/1      #
 ##############################################################################
 
 external_templates:
@@ -116,87 +117,87 @@ templates:
       regex:
         conditions:
           - key: DV
-            value: '(?i)\[(?![^\]]*HDR10Plus)(?![^\]]*HDR10)[^\]]*DV\]'
+            value: '(?i)\bDV\b(?!.*HDR)'
           - key: HDR
-            value: '(?i)\[HDR10\]'
+            value: '(?i)\bHDR10\b'
           - key: Plus
-            value: '(?i)\[HDR10Plus\]'
+            value: '(?i)\bHDR10Plus\b'
           - key: DigitalPlus
-            value: '(?i)\[EAC3(?: 5\.1| 7\.1)?\]'
+            value: '(?i)\bEAC3[ .][57]\.1\b'
           - key: DTS-HD
-            value: '(?i)\[DTS-HD MA(?: 5\.1| 7\.1)?\]'
+            value: '(?i)\bDTS-HD[ .]MA[ .][57]\.1\b'
           - key: DTS-X
-            value: '(?i)\[DTS-X(?: 5\.1| 7\.1)?\]'
+            value: '(?i)\bDTS-X[ .][57]\.1\b'
           - key: TrueHD
-            value: '(?i)\[(?![^\]]*Atmos)[^\]]*TrueHD(?: 5\.1| 7\.1)?\]'
+            value: '(?i)\bTrueHD[ .][57]\.1\b(?! Atmos)'
           - key: Atmos
-            value: '(?i)\[EAC3 Atmos(?: 5\.1| 7\.1)?\]'
+            value: '(?i)\bEAC3[ .]Atmos[ .][57]\.1\b'
           - key: TrueHD-Atmos
-            value: '(?i)\[TrueHD Atmos(?: 5\.1| 7\.1)?\]'
+            value: '(?i)\bTrueHD[ .]Atmos[ .][57]\.1\b'
           - key: DV-HDR
-            value: '(?i)\[DV HDR10\]'
+            value: '(?i)\bDV[ .]HDR10\b'
           - key: DV-Plus
-            value: '(?i)\[DV HDR10Plus\]'
+            value: '(?i)\bDV[ .]HDR10Plus\b'
           - key: DV-DigitalPlus
-            value: '(?i)(?=.*\[(?![^\]]*HDR10Plus)(?![^\]]*HDR10)[^\]]*DV\])(?=.*\[EAC3(?: 5\.1| 7\.1)?\])'
+            value: '(?i)(?=.*(\bDV\b(?!.*HDR)))(?=.*(\bEAC3[ .][57]\.1\b))'
           - key: HDR-DigitalPlus
-            value: '(?i)(?=.*\[HDR10\])(?=.*\[EAC3(?: 5\.1| 7\.1)?\])'
+            value: '(?i)(?!.*(\bDV\b))(?=.*\bHDR10\b)(?=.*\bEAC3[ .][57]\.1\b)'
           - key: Plus-DigitalPlus
-            value: '(?i)(?=.*\[HDR10Plus\])(?=.*\[EAC3(?: 5\.1| 7\.1)?\])'
+            value: '(?i)(?!.*(\bDV\b))(?=.*\bHDR10Plus\b)(?=.*\bEAC3[ .][57]\.1\b)'
           - key: DV-HDR-DigitalPlus
-            value: '(?i)(?=.*\[DV HDR10\])(?=.*\[EAC3(?: 5\.1| 7\.1)?\])'
+            value: '(?i)(?=.*\bDV[ .]HDR10\b)(?=.*\bEAC3[ .][57]\.1\b)'
           - key: DV-Plus-DigitalPlus
-            value: '(?i)(?=.*\[DV HDR10Plus\])(?=.*\[EAC3(?: 5\.1| 7\.1)?\])'
+            value: '(?i)(?=.*\bDV[ .]HDR10Plus\b)(?=.*\bEAC3[ .][57]\.1\b)'
           - key: DV-DTS-HD
-            value: '(?i)(?=.*\[(?![^\]]*HDR10Plus)(?![^\]]*HDR10)[^\]]*DV\])(?=.*\[DTS-HD MA(?: 5\.1| 7\.1)?\])'
+            value: '(?i)(?=.*(\bDV\b(?!.*HDR)))(?=.*\bDTS-HD[ .]MA[ .][57]\.1\b)'
           - key: HDR-DTS-HD
-            value: '(?i)(?=.*\[HDR10\])(?=.*\[DTS-HD MA(?: 5\.1| 7\.1)?\])'
+            value: '(?i)(?!.*(\bDV\b))(?=.*\bHDR10\b)(?=.*\bDTS-HD[ .]MA[ .][57]\.1\b)'
           - key: Plus-DTS-HD
-            value: '(?i)(?=.*\[HDR10Plus\])(?=.*\[DTS-HD MA(?: 5\.1| 7\.1)?\])'
+            value: '(?i)(?!.*(\bDV\b))(?=.*\bHDR10Plus\b)(?=.*\bDTS-HD[ .]MA[ .][57]\.1\b)'
           - key: DV-HDR-DTS-HD
-            value: '(?i)(?=.*\[DV HDR10\])(?=.*\[DTS-HD MA(?: 5\.1| 7\.1)?\])'
+            value: '(?i)(?=.*\bDV[ .]HDR10\b)(?=.*\bDTS-HD[ .]MA[ .][57]\.1\b)'
           - key: DV-Plus-DTS-HD
-            value: '(?i)(?=.*\[DV HDR10Plus\])(?=.*\[DTS-HD MA(?: 5\.1| 7\.1)?\])'
+            value: '(?i)(?=.*\bDV[ .]HDR10Plus\b)(?=.*\bDTS-HD[ .]MA[ .][57]\.1\b)'
           - key: DV-DTS-X
-            value: '(?i)(?=.*\[(?![^\]]*HDR10Plus)(?![^\]]*HDR10)[^\]]*DV\])(?=.*\[DTS-X(?: 5\.1| 7\.1)?\])'
+            value: '(?i)(?=.*(\bDV\b(?!.*HDR)))(?=.*(\bDTS-X[ .][57]\.1\b))'
           - key: HDR-DTS-X
-            value: '(?i)(?=.*\[HDR10\])(?=.*\[DTS-X(?: 5\.1| 7\.1)?\])'
+            value: '(?i)(?!.*(\bDV\b))(?=.*\bHDR10\b)(?=.*(\bDTS-X[ .][57]\.1\b))'
           - key: Plus-DTS-X
-            value: '(?i)(?=.*\[HDR10Plus\])(?=.*\[DTS-X(?: 5\.1| 7\.1)?\])'
+            value: '(?i)(?!.*(\bDV\b))(?=.*\bHDR10Plus\b)(?=.*(\bDTS-X[ .][57]\.1\b))'
           - key: DV-HDR-DTS-X
-            value: '(?i)(?=.*\[DV HDR10\])(?=.*\[DTS-X(?: 5\.1| 7\.1)?\])'
+            value: '(?i)(?=.*\bDV[ .]HDR10\b)(?=.*(\bDTS-X[ .][57]\.1\b))'
           - key: DV-Plus-DTS-X
-            value: '(?i)(?=.*\[DV HDR10Plus\])(?=.*\[DTS-X(?: 5\.1| 7\.1)?\])'
+            value: '(?i)(?=.*\bDV[ .]HDR10Plus\b)(?=.*(\bDTS-X[ .][57]\.1\b))'
           - key: DV-Atmos
-            value: '(?i)(?=.*\[(?![^\]]*HDR10Plus)(?![^\]]*HDR10)[^\]]*DV\])(?=.*\[EAC3 Atmos(?: 5\.1| 7\.1)?\])'
+            value: '(?i)(?=.*(\bDV\b(?!.*HDR)))(?=.*\bEAC3[ .]Atmos[ .][57]\.1\b)'
           - key: HDR-Atmos
-            value: '(?i)(?=.*\[HDR10\])(?=.*\[EAC3 Atmos(?: 5\.1| 7\.1)?\])'
+            value: '(?i)(?!.*(\bDV\b))(?=.*\bHDR10\b)(?=.*\bEAC3[ .]Atmos[ .][57]\.1\b)'
           - key: Plus-Atmos
-            value: '(?i)(?=.*\[HDR10Plus\])(?=.*\[EAC3 Atmos(?: 5\.1| 7\.1)?\])'
+            value: '(?i)(?!.*(\bDV\b))(?=.*\bHDR10Plus\b)(?=.*\bEAC3[ .]Atmos[ .][57]\.1\b)'
           - key: DV-HDR-Atmos
-            value: '(?i)(?=.*\[DV HDR10\])(?=.*\[EAC3 Atmos(?: 5\.1| 7\.1)?\])'
+            value: '(?i)(?=.*\bDV[ .]HDR10\b)(?=.*\bEAC3[ .]Atmos[ .][57]\.1\b)'
           - key: DV-Plus-Atmos
-            value: '(?i)(?=.*\[DV HDR10Plus\])(?=.*\[EAC3 Atmos(?: 5\.1| 7\.1)?\])'
+            value: '(?i)(?=.*\bDV[ .]HDR10Plus\b)(?=.*\bEAC3[ .]Atmos[ .][57]\.1\b)'
           - key: DV-TrueHD
-            value: '(?i)(?=.*\[(?![^\]]*HDR10Plus)(?![^\]]*HDR10)[^\]]*DV\])(?=.*\[(?![^\]]*Atmos)[^\]]*TrueHD(?: 5\.1| 7\.1)?\])'
+            value: '(?i)(?=.*(\bDV\b(?!.*HDR)))(?=.*\bTrueHD[ .][57]\.1\b(?! Atmos))'
           - key: HDR-TrueHD
-            value: '(?i)(?=.*\[HDR10\])(?=.*\[(?![^\]]*Atmos)[^\]]*TrueHD(?: 5\.1| 7\.1)?\])'
+            value: '(?i)(?!.*(\bDV\b))(?=.*\bHDR10\b)(?=.*\bTrueHD[ .][57]\.1\b(?! Atmos))'
           - key: Plus-TrueHD
-            value: '(?i)(?=.*\[HDR10Plus\])(?=.*\[(?![^\]]*Atmos)[^\]]*TrueHD(?: 5\.1| 7\.1)?\])'
+            value: '(?i)(?!.*(\bDV\b))(?=.*\bHDR10Plus\b)(?=.*\bTrueHD[ .][57]\.1\b(?! Atmos))'
           - key: DV-HDR-TrueHD
-            value: '(?i)(?=.*\[DV HDR10\])(?=.*\[(?![^\]]*Atmos)[^\]]*TrueHD(?: 5\.1| 7\.1)?\])'
+            value: '(?i)(?=.*\bDV[ .]HDR10\b)(?=.*\bTrueHD[ .][57]\.1\b(?! Atmos))'
           - key: DV-Plus-TrueHD
-            value: '(?i)(?=.*\[DV HDR10Plus\])(?=.*\[(?![^\]]*Atmos)[^\]]*TrueHD(?: 5\.1| 7\.1)?\])'
+            value: '(?i)(?=.*\bDV[ .]HDR10Plus\b)(?=.*\bTrueHD[ .][57]\.1\b(?! Atmos))'
           - key: DV-TrueHD-Atmos
-            value: '(?i)(?=.*\[(?![^\]]*HDR10Plus)(?![^\]]*HDR10)[^\]]*DV\])(?=.*\[TrueHD Atmos(?: 5\.1| 7\.1)?\])'
+            value: '(?i)(?=.*(\bDV\b(?!.*HDR)))(?=.*\bTrueHD[ .]Atmos[ .][57]\.1\b)'
           - key: HDR-TrueHD-Atmos
-            value: '(?i)(?=.*\[HDR10\])(?=.*\[TrueHD Atmos(?: 5\.1| 7\.1)?\])'
+            value: '(?i)(?!.*(\bDV\b))(?=.*\bHDR10\b)(?=.*\bTrueHD[ .]Atmos[ .][57]\.1\b)'
           - key: Plus-TrueHD-Atmos
-            value: '(?i)(?=.*\[HDR10Plus\])(?=.*\[TrueHD Atmos(?: 5\.1| 7\.1)?\])'
+            value: '(?i)(?!.*(\bDV\b))(?=.*\bHDR10Plus\b)(?=.*\bTrueHD[ .]Atmos[ .][57]\.1\b)'
           - key: DV-HDR-TrueHD-Atmos
-            value: '(?i)(?=.*\[DV HDR10\])(?=.*\[TrueHD Atmos(?: 5\.1| 7\.1)?\])'
+            value: '(?i)(?=.*\bDV[ .]HDR10\b)(?=.*\bTrueHD[ .]Atmos[ .][57]\.1\b)'
           - key: DV-Plus-TrueHD-Atmos
-            value: '(?i)(?=.*\[DV HDR10Plus\])(?=.*\[TrueHD Atmos(?: 5\.1| 7\.1)?\])'
+            value: '(?i)(?=.*\bDV[ .]HDR10Plus\b)(?=.*\bTrueHD[ .]Atmos[ .][57]\.1\b)'
     optional:
       - use_<<type>>
     run_definition:
@@ -235,41 +236,41 @@ templates:
       regex:
         conditions:
           - key: IMAX
-            value: '(?i)\{edition-IMAX[^}]*\}'
+            value: '(?i)\{(edition-)IMAX[^}]*\}'
           - key: Unrated-Edition
-            value: '(?i)\{edition-Unrated[^}]*\}'
+            value: '(?i)\{(edition-)Unrated[^}]*\}'
           - key: Directors-Cut
-            value: '(?i)\{edition-(Director|Ultimate Director)[^}]*\}'
+            value: '(?i)\{(edition-)(Director|Ultimate Director)[^}]*\}'
           - key: Special-Edition
-            value: '(?i)\{edition-Special[^}]*\}'
+            value: '(?i)\{(edition-)Special[^}]*\}'
           - key: Anniversary-Edition
-            value: '(?i)\{edition-\d+th Anniversary[^}]*\}'
+            value: '(?i)\{(edition-)\d+th Anniversary[^}]*\}'
           - key: Collectors-Edition
-            value: '(?i)\{edition-Collector[^}]*\}'
+            value: '(?i)\{(edition-)Collector[^}]*\}'
           - key: Minus-Color
-            value: '(?i)\{edition-Minus Color[^}]*\}'
+            value: '(?i)\{(edition-)Minus Color[^}]*\}'
           - key: Extended-Cut
-            value: '(?i)\{edition-Extended Cut[^}]*\}'
+            value: '(?i)\{(edition-)Extended Cut[^}]*\}'
           - key: Extended-Edition
-            value: '(?i)\{edition-Extended(?! Cut)[^}]*\}'
+            value: '(?i)\{(edition-)Extended(?! Cut)[^}]*\}'
           - key: Open-Matte
-            value: '(?i)\{edition-Open Matte[^}]*\}'
+            value: '(?i)\{(edition-)Open Matte[^}]*\}'
           - key: Final-Cut
-            value: '(?i)\{edition-Final Cut[^}]*\}'
+            value: '(?i)\{(edition-)Final Cut[^}]*\}'
           - key: Remastered
-            value: '(?i)\{edition-Remastered[^}]*\}'
+            value: '(?i)\{(edition-)Remastered[^}]*\}'
           - key: Restored
-            value: '(?i)\{edition-Restored[^}]*\}'
+            value: '(?i)\{(edition-)Restored[^}]*\}'
           - key: Signature-Edition
-            value: '(?i)\{edition-Signature[^}]*\}'
+            value: '(?i)\{(edition-)Signature[^}]*\}'
           - key: Theatrical
-            value: '(?i)\{edition-Theatrical(?! Cut)[^}]*\}'
+            value: '(?i)\{(edition-)Theatrical(?! Cut)[^}]*\}'
           - key: Theatrical-Cut
-            value: '(?i)\{edition-Theatrical Cut[^}]*\}'
+            value: '(?i)\{(edition-)Theatrical Cut[^}]*\}'
           - key: Uncut
-            value: '(?i)\{edition-Uncut[^}]*\}'
+            value: '(?i)\{(edition-)Uncut[^}]*\}'
           - key: Ultimate-Edition
-            value: '(?i)\{edition-Ultimate(?! Director)[^}]*\}'
+            value: '(?i)\{(edition-)Ultimate(?! Director)[^}]*\}'
     optional:
       - use_<<type>>
       - allowed_libraries
